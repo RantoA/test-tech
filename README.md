@@ -19,7 +19,7 @@ Full-stack blog post manager built for the **Fintrellis technical assignment**.
 
    ```bash
    git clone <repository-url>
-   cd my-blog
+   cd test-tech
    ```
 
 2. Create the `.env` file from the example and adjust the values if needed
