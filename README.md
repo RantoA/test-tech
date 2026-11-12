@@ -51,4 +51,10 @@ With the default ports:
 | API docs (ReDoc)     | <http://localhost:8005/redoc>  |
 | API docs (Swagger UI)| <http://localhost:8005/docs>   |
 
+## Test the API using Swagger UI
+
 ![Swagger UI](./project-docs/images/swagger-ui.png)
+
+## Explore the API documentation using ReDoc
+
+![ReDoc](./project-docs/images/redoc.png)
