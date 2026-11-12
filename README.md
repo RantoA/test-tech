@@ -8,8 +8,8 @@ Full-stack blog post manager built for the **Fintrellis technical assignment**.
 | Frontend | Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, React Hook Form, Zod, Sonner |
 | Infra    | PostgreSQL 16, Docker, Docker Compose |
 
-📖 **Full documentation** (features, architecture, API reference, migrations, tests, security): 
-- [document.md](./document.md)
+📖 **Full documentation** (features, architecture, API reference, migrations, tests, security):
+[project-docs/document.md](./project-docs/document.md)
 
 ## Getting started
 
@@ -44,9 +44,11 @@ Stop it with `docker compose down`, and follow the logs with `docker compose log
 
 With the default ports:
 
-| Service    | URL |
-|------------|-----|
-| Frontend   | http://localhost:3000 |
-| API        | http://localhost:8000/api/v1 |
-| API Doc | http://localhost:8000/redoc |
-| Swagger UI | http://localhost:8000/docs |
+| Service              | URL                            |
+|----------------------|--------------------------------|
+| Frontend             | <http://localhost:3000>        |
+| API                  | <http://localhost:8000/api/v1> |
+| API docs (ReDoc)     | <http://localhost:8000/redoc>  |
+| API docs (Swagger UI)| <http://localhost:8000/docs>   |
+
+![Swagger UI](./project-docs/images/swagger-ui.png)

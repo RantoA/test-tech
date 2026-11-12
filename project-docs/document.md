@@ -173,9 +173,31 @@ Never commit a real `.env` file (they are git-ignored).
 
 ## API reference
 
-The interactive documentation is available at **http://localhost:8005/docs**. To call
-protected endpoints from Swagger, log in, copy `data.access_token` and click **Authorize**
-(Bearer). Bearer requests do not need a CSRF token.
+FastAPI generates two interactive documentations from the OpenAPI schema
+(`/openapi.json`). Both always match the code.
+
+### Swagger UI — `/docs`
+
+**http://localhost:8005/docs** lists every endpoint by tag (Authentication, Users, Posts,
+Uploads, Health). You can **run requests directly from the browser**. The padlock marks
+protected endpoints: call `POST /api/v1/auth/login`, copy `data.access_token`, click
+**Authorize** and paste the token (Bearer). Bearer requests do not need a CSRF token.
+
+![Swagger UI: endpoints grouped by tag, with the Authorize button](./images/swagger-ui.png)
+
+### ReDoc — `/redoc`
+
+**http://localhost:8005/redoc** is a read-only reference, convenient for reading each
+endpoint in detail:
+
+![ReDoc: detail of PUT /api/v1/users/me](./images/redoc.png)
+
+1. **Navigation**: endpoints grouped by tag, with a search field.
+2. **Responses**: every possible status code with its meaning (here 200, 401, 403, 409 and 422).
+3. **Endpoint description**: required authorization (`HTTPBearer`) and request body schema
+   with the field types.
+4. **Samples**: an example request payload and an example response, wrapped in the
+   `{status, message, data}` envelope.
 
 All responses use the same envelope:
 
