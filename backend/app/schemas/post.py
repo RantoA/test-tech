@@ -66,8 +66,8 @@ class PostRead(BaseModel):
     content: list[ContentBlock]
     cover_image: str | None
     cover_image_url: str | None = None
-    author_id: uuid.UUID
-    author: AuthorRead
+    author_id: uuid.UUID | None
+    author: AuthorRead | None
     created_at: datetime
     updated_at: datetime
 

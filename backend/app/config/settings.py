@@ -35,6 +35,9 @@ class Settings(BaseSettings):
     COOKIE_SAMESITE: Literal["lax", "strict", "none"] = "lax"
     COOKIE_DOMAIN: str | None = None
 
+    # Publish the default editorial articles on first startup.
+    SEED_DEFAULT_POSTS: bool = True
+
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod
     def split_origins(cls, value: object) -> object:
@@ -50,7 +53,7 @@ class Settings(BaseSettings):
     @model_validator(mode="after")
     def check_production_secrets(self) -> "Settings":
         if self.APP_ENV == "production" and (
-            len(self.SECRET_KEY) < 32 or self.SECRET_KEY.startswith("change_me")
+            len(self.SECRET_KEY) < 32 or str(self.SECRET_KEY).startswith("change_me")
         ):
             raise ValueError("SECRET_KEY must be a strong random value (>= 32 chars) in production")
         return self

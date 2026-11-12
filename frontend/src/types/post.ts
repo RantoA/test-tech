@@ -15,8 +15,9 @@ export interface Post {
   content: ContentBlock[];
   cover_image: string | null;
   cover_image_url: string | null;
-  author_id: string;
-  author: Author;
+  /** null for editorial posts published by the platform itself. */
+  author_id: string | null;
+  author: Author | null;
   created_at: string;
   updated_at: string;
 }

@@ -23,8 +23,9 @@ class Post(TimestampMixin, Base):
     excerpt: Mapped[str] = mapped_column(Text, nullable=False)
     # Storage key of the cover image (file name for local storage), or None.
     cover_image: Mapped[str | None] = mapped_column(String(255), nullable=True)
-    author_id: Mapped[uuid.UUID] = mapped_column(
-        Uuid, ForeignKey("users.id", ondelete="CASCADE"), index=True, nullable=False
+    # None for editorial posts shipped with the platform (seeded, read-only through the API).
+    author_id: Mapped[uuid.UUID | None] = mapped_column(
+        Uuid, ForeignKey("users.id", ondelete="CASCADE"), index=True, nullable=True
     )
 
-    author: Mapped["User"] = relationship(back_populates="posts", lazy="joined")
+    author: Mapped["User | None"] = relationship(back_populates="posts", lazy="joined")

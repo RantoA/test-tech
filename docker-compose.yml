@@ -39,6 +39,7 @@ services:
       PUBLIC_API_URL: ${PUBLIC_API_URL:-http://localhost:8005}
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3005}
       COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      SEED_DEFAULT_POSTS: ${SEED_DEFAULT_POSTS:-true}
     volumes:
       - uploads:/app/uploads
     ports:

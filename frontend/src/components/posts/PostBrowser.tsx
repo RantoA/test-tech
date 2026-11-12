@@ -32,7 +32,7 @@ export function PostBrowser() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h2 id="articles-title" className="text-xl font-semibold text-ink">
-            Latest articles
+            All articles
           </h2>
           <p className="mt-1 text-sm text-muted">
             {data ? `${data.total} article${data.total === 1 ? "" : "s"}` : " "}

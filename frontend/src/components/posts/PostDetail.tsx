@@ -10,7 +10,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { PageLoader } from "@/components/ui/Spinner";
 import { useAuth } from "@/hooks/useAuth";
 import { usePost } from "@/hooks/usePost";
-import { formatDate, formatDateTime, readingTime } from "@/utils/format";
+import { authorName, formatDate, formatDateTime, readingTime } from "@/utils/format";
 
 import { ContentRenderer } from "./ContentRenderer";
 import { CoverImage } from "./CoverImage";
@@ -38,7 +38,7 @@ export function PostDetail() {
   }
 
   const { post } = state;
-  const isAuthor = user?.id === post.author_id;
+  const isAuthor = !!user && user.id === post.author_id;
   const minutes = readingTime(post.content.map((block) => block.text));
   const edited = post.updated_at !== post.created_at;
 
@@ -60,7 +60,7 @@ export function PostDetail() {
           <h1 className="text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">{post.title}</h1>
           <p className="mt-4 text-lg leading-relaxed text-muted">{post.excerpt}</p>
           <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 border-y border-line py-4 text-sm text-muted">
-            <span className="font-medium text-ink">{post.author.name}</span>
+            <span className="font-medium text-ink">{authorName(post)}</span>
             <span aria-hidden>·</span>
             <time dateTime={post.created_at}>Published {formatDate(post.created_at)}</time>
             <span aria-hidden>·</span>

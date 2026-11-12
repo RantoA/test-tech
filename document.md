@@ -67,7 +67,7 @@ docker compose down -v              # stop and delete volumes (database + upload
 
 Startup order is enforced by health checks: `db` (pg_isready) → `backend` (`/health`, which
 pings the database) → `frontend`. Before starting Uvicorn, the backend waits for PostgreSQL and
-then runs `alembic upgrade head`.
+runs `alembic upgrade head`, then publishes the default editorial articles (`scripts/seed.py`, only once).
 
 ---
 
@@ -86,10 +86,15 @@ then runs `alembic upgrade head`.
 - Public listing with pagination, title search, author filter and sorting by creation date
 - Dashboard with article count, a table of the user's articles, edit/delete actions with confirmation, and an empty state
 
+**Default content**
+- 5 editorial articles about AI are published on first startup, with generated cover images.
+  They have no author account (signed "my-blog") and are read-only through the API (403).
+  The seed is idempotent (matched by slug); disable it with `SEED_DEFAULT_POSTS=false`.
+
 **Quality**
 - Uniform JSON responses `{status, message, data}`, centralized error handlers
 - Structured JSON logs with request id, latency and user id
-- 46 backend tests (Pytest + TestClient) against an isolated PostgreSQL database
+- 49 backend tests (Pytest + TestClient) against an isolated PostgreSQL database
 - Responsive UI, with loading, error, empty and success states and toast notifications
 
 ---
@@ -160,6 +165,7 @@ Never commit a real `.env` file (they are git-ignored).
 | `PUBLIC_API_URL` | `http://localhost:8005` | Base used to build public image URLs |
 | `CORS_ORIGINS` | `http://localhost:3005` | Comma-separated allowed origins |
 | `COOKIE_SECURE` | `false` | Set `true` behind HTTPS |
+| `SEED_DEFAULT_POSTS` | `true` | Publish the default editorial articles on first startup |
 | `NEXT_PUBLIC_API_URL` | `http://localhost:8005/api/v1` | API URL used by the browser (build arg) |
 | `POSTGRES_DB` / `POSTGRES_USER` / `POSTGRES_PASSWORD` | `blog_manager` / `blog_user` / `change_me` | Database credentials |
 
@@ -236,7 +242,7 @@ docker compose exec backend alembic revision --autogenerate -m "msg"  # new migr
 Schema:
 - `users`: id (UUID), name, email (unique), hashed_password, created_at, updated_at
 - `posts`: id (UUID), title, slug (unique), content (JSONB blocks), excerpt, cover_image,
-  author_id (FK → users, cascade), created_at, updated_at. Indexes on title, author_id and created_at.
+  author_id (FK → users, cascade; NULL for editorial posts), created_at, updated_at. Indexes on title, author_id and created_at.
 
 ---
 

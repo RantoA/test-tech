@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import type { Post } from "@/types/post";
-import { formatDate } from "@/utils/format";
+import { authorName, formatDate } from "@/utils/format";
 
 import { CoverImage } from "./CoverImage";
 
@@ -13,7 +13,7 @@ export function PostCard({ post }: { post: Post }) {
       </Link>
       <div className="flex flex-1 flex-col p-5">
         <p className="text-xs text-muted">
-          {post.author.name} · <time dateTime={post.created_at}>{formatDate(post.created_at)}</time>
+          {authorName(post)} · <time dateTime={post.created_at}>{formatDate(post.created_at)}</time>
         </p>
         <h2 className="mt-2 text-lg font-semibold leading-snug text-ink">
           <Link href={`/posts/${post.id}`} className="hover:text-accent">
