@@ -15,9 +15,9 @@ class Settings(BaseSettings):
     APP_ENV: Literal["development", "test", "production"] = "development"
     LOG_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO"
 
-    DATABASE_URL: str = "postgresql+asyncpg://blog_user:change_me@localhost:5432/blog_manager"
+    DATABASE_URL: str = "postgresql+asyncpg://blog_user:change_me@localhost:5452/blog_manager"
     TEST_DATABASE_URL: str = (
-        "postgresql+asyncpg://blog_user:change_me@localhost:5432/blog_manager_test"
+        "postgresql+asyncpg://blog_user:change_me@localhost:5452/blog_manager_test"
     )
 
     SECRET_KEY: str = Field(default="change_me", min_length=8)

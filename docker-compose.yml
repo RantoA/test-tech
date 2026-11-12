@@ -12,7 +12,7 @@ services:
       - pgdata:/var/lib/postgresql/data
       - ./docker/postgres/init-test-db.sh:/docker-entrypoint-initdb.d/10-init-test-db.sh:ro
     ports:
-      - "${DB_PORT:-5432}:5432"
+      - "${DB_PORT:-5452}:5452"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 5s
@@ -28,8 +28,8 @@ services:
     environment:
       APP_ENV: ${APP_ENV:-development}
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
-      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-blog_user}:${POSTGRES_PASSWORD:-change_me}@db:5432/${POSTGRES_DB:-blog_manager}
-      TEST_DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-blog_user}:${POSTGRES_PASSWORD:-change_me}@db:5432/${POSTGRES_DB:-blog_manager}_test
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-blog_user}:${POSTGRES_PASSWORD:-change_me}@db:5452/${POSTGRES_DB:-blog_manager}
+      TEST_DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-blog_user}:${POSTGRES_PASSWORD:-change_me}@db:5452/${POSTGRES_DB:-blog_manager}_test
       SECRET_KEY: ${SECRET_KEY:-change_me_in_production_please}
       ALGORITHM: ${ALGORITHM:-HS256}
       ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES:-60}

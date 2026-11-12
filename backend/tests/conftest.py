@@ -13,7 +13,7 @@ os.environ["LOG_LEVEL"] = "WARNING"
 os.environ["SECRET_KEY"] = "test-secret-key-with-at-least-32-characters"
 os.environ["DATABASE_URL"] = os.environ.get(
     "TEST_DATABASE_URL",
-    "postgresql+asyncpg://blog_user:change_me@localhost:5432/blog_manager_test",
+    "postgresql+asyncpg://blog_user:change_me@localhost:5452/blog_manager_test",
 )
 
 from fastapi.testclient import TestClient  # noqa: E402
